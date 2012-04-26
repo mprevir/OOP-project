@@ -31,8 +31,10 @@ public class Info {
         System.out.println("Everything's fine");
     }
 
-    public Info(Location currentPos1, WeatherChanged weatherChanged1, Navigator navigator1, Forecaster forecaster1) {
+    public Info(Location currentPos1,Weather weather1, WeatherChanged weatherChanged1, Navigator navigator1, Forecaster forecaster1) {
         this.currentPos = currentPos1;
+        this.knownPeriods = new HashMap<SinglePeriod, Weather>();
+        this.knownPeriods.put(new SinglePeriod(), weather1);
         this.weatherChanged = weatherChanged1;
         this.navigator = navigator1;
         this.forecaster = forecaster1;

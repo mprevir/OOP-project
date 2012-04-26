@@ -13,4 +13,8 @@ public class Dude {
     public void draw(){
         //TODO: draw dude
     }
+
+    public Clothes choose_cloth() {
+        return bodywear = new Coat();
+    }
 }

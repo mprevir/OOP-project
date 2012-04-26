@@ -13,4 +13,10 @@ public class SinglePeriod {
     private Location pos;
     private Date timeBegin;      //it would be better to use our own Date class
     private Date timeEnd;
+
+    public SinglePeriod() {
+        pos = new Location();
+        timeBegin = new Date(2012, 4, 25, 12, 30);
+        timeEnd = new Date(2012, 4, 25, 12, 50);
+    }
 }

@@ -1,6 +1,7 @@
 package ua.dudeweather;
 
 import ua.dudeweather.dressup.Coat;
+import ua.dudeweather.dressup.Dude;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,11 +16,12 @@ public class Main {
         Navigator navigator1 = new Navigator();
         Forecaster forecaster1 = new Forecaster();
         Location currentPos1 = new Location();
+        Weather weather1 = new Weather(50, 15, 3, 760);
 
-        Info info1 = new Info(currentPos1, weatherChanged1, navigator1, forecaster1);
+        Info info1 = new Info(currentPos1, weather1, weatherChanged1, navigator1, forecaster1);
 
-        Coat coat1 = new Coat();
-        coat1.draw();
+        Dude dude = new Dude();
+        dude.choose_cloth().draw();
     }
 
     private Info info;

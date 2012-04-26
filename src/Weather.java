@@ -13,4 +13,11 @@ public class Weather {
     private double windSpeed;
     private double pressure;
     //TODO: declare enum types for _precipitation_ and _cloudiness_
+
+    public Weather(double humidity1, double temperature1, double windSpeed1, double  pressure1){
+        this.humidity = humidity1;
+        this.temperature = temperature1;
+        this.windSpeed = windSpeed1;
+        this.pressure = pressure1;
+    }
 }
