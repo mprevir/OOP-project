@@ -7,9 +7,6 @@ package ua.dudeweather.dressup;
  * Time: 20:02
  * To change this template use File | Settings | File Templates.
  */
-public class WindProof implements Clothes{
-    public void draw() {
-        //dont know how to make this method virtual/abstract
-        return;
-    }
+public interface WindProof extends Clothes{
+    public void draw();
 }

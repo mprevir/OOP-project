@@ -16,6 +16,7 @@ public class Location {
         longtitude = 0;
         latitude = 0;
         placeName = "the Gulf of Guinea";
+
         System.out.println("object Location created");
     }
 }

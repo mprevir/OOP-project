@@ -7,10 +7,7 @@ package ua.dudeweather.dressup;
  * Time: 20:01
  * To change this template use File | Settings | File Templates.
  */
-public class WaterProof implements Clothes {
-    @Override
-    public void draw() {
-        //dont know how to make this method virtual/abstract
-        return;
-    };
+public interface WaterProof extends Clothes {
+//    @Override    //wtf??
+    public void draw();
 }

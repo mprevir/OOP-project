@@ -1,5 +1,7 @@
 package ua.dudeweather;
 
+import ua.dudeweather.dressup.Coat;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Admin
@@ -15,6 +17,9 @@ public class Main {
         Location currentPos1 = new Location();
 
         Info info1 = new Info(currentPos1, weatherChanged1, navigator1, forecaster1);
+
+        Coat coat1 = new Coat();
+        coat1.draw();
     }
 
     private Info info;
