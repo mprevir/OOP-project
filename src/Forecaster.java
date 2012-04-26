@@ -11,6 +11,10 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class Forecaster {
+    public Forecaster(){
+        System.out.println("object Forecaster created");
+    }
+
     public Weather getWeather(Location pos, Date time){
         //TODO: get weather info from weathersource
         return null;

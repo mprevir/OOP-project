@@ -9,7 +9,12 @@ package ua.dudeweather;
  */
 public class Main {
     public static void main(String args[]) {
-         Info info1 = new Info();
+        WeatherChanged weatherChanged1 = new WeatherChanged();
+        Navigator navigator1 = new Navigator();
+        Forecaster forecaster1 = new Forecaster();
+        Location currentPos1 = new Location();
+
+        Info info1 = new Info(currentPos1, weatherChanged1, navigator1, forecaster1);
     }
 
     private Info info;

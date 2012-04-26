@@ -1,6 +1,7 @@
 package ua.dudeweather;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,14 +21,23 @@ public class Info {
 
 
     public Info() {
-        this.navigator = null;
-        this.currentPos = null;
-        this.favouritePlaces = null;
-        this.knownPeriods = null;
-        this.forecaster = null;
-        this.weatherChanged = null;
+        this.navigator = new Navigator();
+        this.currentPos = new Location();
+        this.favouritePlaces[0] = new Location();
+        this.knownPeriods = new HashMap<SinglePeriod, Weather>();
+        this.forecaster = new Forecaster();
+        this.weatherChanged = new WeatherChanged();
 
         System.out.println("Everything's fine");
+    }
+
+    public Info(Location currentPos1, WeatherChanged weatherChanged1, Navigator navigator1, Forecaster forecaster1) {
+        this.currentPos = currentPos1;
+        this.weatherChanged = weatherChanged1;
+        this.navigator = navigator1;
+        this.forecaster = forecaster1;
+
+        System.out.println("Information is stored, OK");
     }
 
     public Info(Navigator navigator, Location currentPos, Location[] favouritePlaces, Map<SinglePeriod, Weather> knownPeriods, Forecaster forecaster, WeatherChanged weatherChanged) {

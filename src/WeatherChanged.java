@@ -15,4 +15,14 @@ public class WeatherChanged {
     private boolean deltaPrecipitation;
     private boolean deltaCloudiness;
 
+    public WeatherChanged() {
+        deltaHumidity = 10;
+        deltaTemperature = 5;
+        deltaWindSpeed = 10;
+        deltaPressure = 20;
+        deltaPrecipitation = true;
+        deltaCloudiness = false;
+
+        System.out.println("object WeatherChanged created");
+    }
 }

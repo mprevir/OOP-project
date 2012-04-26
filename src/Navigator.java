@@ -8,6 +8,10 @@ package ua.dudeweather;
  * To change this template use File | Settings | File Templates.
  */
 public class Navigator {
+    public Navigator(){
+        System.out.println("object Navigator created");
+    }
+
     public Location getCurrentPos(){
         //TODO: get current position using mapsource
         return null;
