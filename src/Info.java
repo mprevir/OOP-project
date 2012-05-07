@@ -1,6 +1,12 @@
 package ua.dudeweather;
 
+import javax.xml.crypto.Data;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +19,7 @@ import java.util.Map;
  */
 public class Info {
     private Navigator navigator;
-    private Map<SinglePeriod, Weather> knownPeriods;
+    public Map<SinglePeriod, Weather> knownPeriods;
     private Location favouritePlaces[];
     private Location currentPos;
     private WeatherChanged weatherChanged;
@@ -23,6 +29,7 @@ public class Info {
     public Info() {
         this.navigator = new Navigator();
         this.currentPos = new Location();
+        this.favouritePlaces = new Location[6];
         this.favouritePlaces[0] = new Location();
         this.knownPeriods = new HashMap<SinglePeriod, Weather>();
         this.forecaster = new Forecaster();
@@ -50,4 +57,50 @@ public class Info {
         this.forecaster = forecaster;
         this.weatherChanged = weatherChanged;
     }
+
+    public void readWeatherInfo() throws IOException, ClassNotFoundException{
+        File f = new File("D:\\weathersource.ddw");
+        double readHumidity;
+        double readTemperature;
+        double readWindSpeed;
+        double readPressure;
+        Weather.Precipitation readPrecipitation;
+        Weather.Cloudiness readCloudiness;
+        SinglePeriod singlePeriod = new SinglePeriod();
+        Weather weather = new Weather();
+
+        FileInputStream fis = new FileInputStream(f);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        while (fis.available() != 0)   {
+            boolean firstIteration = true;
+
+            Date readTime1 = (Date) ois.readObject();
+            Date readTime2 = (Date) ois.readObject();
+            readHumidity = ois.readDouble();
+            readTemperature = ois.readDouble();
+            readWindSpeed = ois.readDouble();
+            readPressure = ois.readDouble();
+
+            readPrecipitation = (Weather.Precipitation) ois.readObject();
+            readCloudiness = (Weather.Cloudiness) ois.readObject();
+
+            if (!firstIteration)
+                if (readPrecipitation == this.knownPeriods.get(singlePeriod).getPrecipitation()) {
+                    if (Math.abs(readTemperature - weather.getTemperature()) <= weatherChanged.getDeltaTemperature()){
+                        this.knownPeriods.remove(singlePeriod);
+                        singlePeriod.setTimeEnd(readTime2);
+                        this.knownPeriods.put(singlePeriod, weather);
+
+                        continue;
+                    }
+                }
+
+            weather = new Weather(readHumidity, readTemperature, readWindSpeed, readPressure, readPrecipitation, readCloudiness);
+            singlePeriod = new SinglePeriod(readTime1, readTime2);
+            this.knownPeriods.put(singlePeriod, weather);
+            firstIteration = false;
+        }
+
+    }
+
 }

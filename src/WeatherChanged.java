@@ -25,4 +25,16 @@ public class WeatherChanged {
 
         System.out.println("object WeatherChanged created");
     }
+
+    public double getDeltaTemperature() {
+        return this.deltaTemperature;
+    }
+
+    public boolean getDeltaPrecipitation() {
+        return this.deltaPrecipitation;
+    }
+
+    public boolean getDeltaCloudiness() {
+        return this.deltaCloudiness;
+    }
 }

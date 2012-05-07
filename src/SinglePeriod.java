@@ -1,5 +1,6 @@
 package ua.dudeweather;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -15,8 +16,34 @@ public class SinglePeriod {
     private Date timeEnd;
 
     public SinglePeriod() {
+        this.pos = new Location();
+        this.timeBegin = new Date();
+        this.timeEnd = new Date();
+    }
+    
+    public SinglePeriod(Date timeBegin, Date timeEnd) {
         pos = new Location();
-        timeBegin = new Date(2012, 4, 25, 12, 30);
-        timeEnd = new Date(2012, 4, 25, 12, 50);
+        this.timeBegin = timeBegin;
+        this.timeEnd = timeEnd;
+    }
+
+    public Date getTimeBegin() {
+        return this.timeBegin;
+    }
+    
+    public void setTimeBegin(Date newTimeBegin) {
+        this.timeBegin = newTimeBegin;
+    }
+
+    public Date getTimeEnd() {
+        return this.timeEnd;
+    }
+    
+    public void setTimeEnd(Date newTimeEnd) {
+        this.timeEnd = newTimeEnd;
+    }
+
+    public Location getPos() {
+        return this.pos;
     }
 }
