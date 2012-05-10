@@ -2,6 +2,8 @@ package ua.dudeweather.dressup;
 
 import ua.dudeweather.Weather;
 
+import java.util.ArrayList;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Admin
@@ -17,6 +19,7 @@ public class Legswear extends Clothes{
         legswear.highTemperature = 20;
         legswear.suitsAnyPrecip = true;
         legswear.suitsAnyCloud = true;
+        legswear.s = "Dude wearing pants";
 
         return legswear;
     }
@@ -27,9 +30,11 @@ public class Legswear extends Clothes{
         legswear.lowTemperature = 20;
         legswear.highTemperature = 50;
         legswear.suitsAnyPrecip = false;
+        legswear.suitsPrecip = new ArrayList<Weather.Precipitation>();
         legswear.suitsPrecip.add(Weather.Precipitation.NONE);
         legswear.suitsPrecip.add(Weather.Precipitation.DRIZZLE);
         legswear.suitsAnyCloud = true;
+        legswear.s = "Dude wearing shorts";
 
         return legswear;
     }

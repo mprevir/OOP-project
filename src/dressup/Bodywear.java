@@ -19,6 +19,7 @@ public class Bodywear extends Clothes{
         bodywear.highTemperature = 22;
         bodywear.suitsAnyPrecip = true;
         bodywear.suitsAnyCloud = true;
+        bodywear.s = "Dude wearing Jacket";
 
         return bodywear;
     }
@@ -34,6 +35,7 @@ public class Bodywear extends Clothes{
         bodywear.suitsPrecip.add(Weather.Precipitation.DRIZZLE);
         bodywear.suitsPrecip.add(Weather.Precipitation.RAIN);
         bodywear.suitsAnyCloud = true;
+        bodywear.s = "Dude wearing Coat";
 
         return bodywear;
     }
@@ -45,6 +47,7 @@ public class Bodywear extends Clothes{
         bodywear.highTemperature = 5;
         bodywear.suitsAnyPrecip = true;
         bodywear.suitsAnyCloud = true;
+        bodywear.s = "Dude wearing winter jacket";
 
         return bodywear;
     }

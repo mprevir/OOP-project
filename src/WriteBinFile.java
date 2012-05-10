@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class WriteBinFile {
     public static void main(String args[]) throws IOException, ClassNotFoundException {
-        File f = new File("D:\\weathersource.ddw");
+        File f = new File("D:\\weathersource2.ddw");
         /*if (!f.exists())
             f.createNewFile();
         FileOutputStream fos = new FileOutputStream(f, true);
@@ -21,7 +21,7 @@ public class WriteBinFile {
         Date timeEnd = new Date(2012, 5, 6, 14, 0);
 
         double humidity = 60;
-        double temperature = 22;
+        double temperature = 0;
         double windSpeed = 5;
         double pressure =760;
         Weather weather = new Weather(humidity, temperature, windSpeed, pressure, Weather.Precipitation.NONE, Weather.Cloudiness.BKN);
@@ -31,19 +31,19 @@ public class WriteBinFile {
         timeBegin = new Date(2012, 5, 6, 14, 0);
         timeEnd = new Date(2012, 5, 6, 16, 0);
         singlePeriod = new SinglePeriod(timeBegin, timeEnd);
-        weather.setTemperature(20);
+        weather.setTemperature(-1);
         writeToFile(weather, singlePeriod, oos);
 
         timeBegin = new Date(2012, 5, 6, 16, 0);
         timeEnd = new Date(2012, 5, 6, 17, 30);
         singlePeriod = new SinglePeriod(timeBegin, timeEnd);
-        weather.setTemperature(17);
-        weather.setPrecipitation(Weather.Precipitation.DRIZZLE);
+        weather.setTemperature(2);
+        weather.setPrecipitation(Weather.Precipitation.SNOW);
         writeToFile(weather, singlePeriod, oos);
 
         oos.close();
-        fos.close();      */
-
+        fos.close();
+                                 */
         FileInputStream fis = new FileInputStream(f);
         ObjectInputStream ois = new ObjectInputStream(fis);
         while (fis.available() != 0)   {
@@ -56,6 +56,7 @@ public class WriteBinFile {
     
             Weather.Precipitation readPrecipitation = (Weather.Precipitation) ois.readObject();
             Weather.Cloudiness readCloudiness = (Weather.Cloudiness) ois.readObject();
+            System.out.println(readTime.getDate() + " of " + readTime.getMonth() + ", " + readTime.getYear());
             System.out.println(readTime.getHours() + "hrs " + readTime.getMinutes() + "min - " + readTime2.getHours() + "hrs " + readTime2.getMinutes() + "min");
             System.out.print("Temperature: " + readTemperature + "C\n");
             System.out.println("Precipitation:" + readPrecipitation.toString() + "\nCloudiness: " + readCloudiness.toString() + '\n');
@@ -64,14 +65,18 @@ public class WriteBinFile {
         ois.close();
     }
 
-   public static void writeToFile(Weather weather, SinglePeriod singlePeriod, ObjectOutputStream oos) throws IOException{
-       oos.writeObject(singlePeriod.getTimeBegin());
-       oos.writeObject(singlePeriod.getTimeEnd());
-       oos.writeDouble(weather.getHumidity());
-       oos.writeDouble(weather.getTemperature());
-       oos.writeDouble(weather.getWindSpeed());
-       oos.writeDouble(weather.getPressure());
-       oos.writeObject(weather.getPrecipitation());
-       oos.writeObject(weather.getCloudiness());
-   }
+                        /*
 }
+    public static void writeToFile(Weather weather, SinglePeriod singlePeriod, ObjectOutputStream oos) throws IOException{
+        oos.writeObject(singlePeriod.getTimeBegin());
+        oos.writeObject(singlePeriod.getTimeEnd());
+        oos.writeDouble(weather.getHumidity());
+        oos.writeDouble(weather.getTemperature());
+        oos.writeDouble(weather.getWindSpeed());
+        oos.writeDouble(weather.getPressure());
+        oos.writeObject(weather.getPrecipitation());
+        oos.writeObject(weather.getCloudiness());
+    }                 */
+}
+
+

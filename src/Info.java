@@ -1,14 +1,8 @@
 package ua.dudeweather;
 
 import javax.xml.crypto.Data;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -68,6 +62,20 @@ public class Info {
         return this.knownPeriods;
     }
 
+    public SinglePeriod getCurrentPeriod(Map<SinglePeriod, Weather> knownPeriods, Date curDate) throws NoSuchPeriodException {
+        Iterator it = knownPeriods.entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry) it.next();
+            SinglePeriod chkPeriod = (SinglePeriod) pairs.getKey();
+            if (curDate.after(chkPeriod.getTimeBegin()) && curDate.before(chkPeriod.getTimeEnd()))
+                return chkPeriod;
+        }
+
+        //TODO: throw exeption AllouYobaNetuInfy
+        throw new NoSuchPeriodException(curDate);
+    }
+
     public void readWeatherInfo(String weathersource) throws IOException, ClassNotFoundException{
         File f = new File(weathersource);
         boolean concat = true;
@@ -81,7 +89,13 @@ public class Info {
         SinglePeriod singlePeriod = new SinglePeriod();
         Weather weather = new Weather();
 
-        FileInputStream fis = new FileInputStream(f);
+        FileInputStream fis;
+        try {
+            fis = new FileInputStream(f);
+        } catch (FileNotFoundException e) {
+            System.out.println("Oops... Troubles with weathersource. Pls try again later");
+            throw new IOException();
+        }
         ObjectInputStream ois = new ObjectInputStream(fis);
         while (fis.available() != 0)   {
 
