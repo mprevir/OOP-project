@@ -19,11 +19,12 @@ import java.util.Map;
  */
 public class Info {
     private Navigator navigator;
-    public Map<SinglePeriod, Weather> knownPeriods;
+    private Map<SinglePeriod, Weather> knownPeriods;
     private Location favouritePlaces[];
     private Location currentPos;
     private WeatherChanged weatherChanged;
     private Forecaster forecaster;
+    private ArrayList<SinglePeriod> timePeriods;
 
 
     public Info() {
@@ -34,6 +35,7 @@ public class Info {
         this.knownPeriods = new HashMap<SinglePeriod, Weather>();
         this.forecaster = new Forecaster();
         this.weatherChanged = new WeatherChanged();
+        this.timePeriods = new ArrayList<SinglePeriod>();
 
         System.out.println("Everything's fine");
     }
@@ -58,8 +60,18 @@ public class Info {
         this.weatherChanged = weatherChanged;
     }
 
-    public void readWeatherInfo() throws IOException, ClassNotFoundException{
-        File f = new File("D:\\weathersource.ddw");
+    public ArrayList<SinglePeriod> getTimePeriods() {
+        return this.timePeriods;
+    }
+
+    public Map<SinglePeriod, Weather> getKnownPeriods() {
+        return this.knownPeriods;
+    }
+
+    public void readWeatherInfo(String weathersource) throws IOException, ClassNotFoundException{
+        File f = new File(weathersource);
+        boolean concat = true;
+        boolean firstIteration = true;
         double readHumidity;
         double readTemperature;
         double readWindSpeed;
@@ -72,7 +84,6 @@ public class Info {
         FileInputStream fis = new FileInputStream(f);
         ObjectInputStream ois = new ObjectInputStream(fis);
         while (fis.available() != 0)   {
-            boolean firstIteration = true;
 
             Date readTime1 = (Date) ois.readObject();
             Date readTime2 = (Date) ois.readObject();
@@ -84,23 +95,33 @@ public class Info {
             readPrecipitation = (Weather.Precipitation) ois.readObject();
             readCloudiness = (Weather.Cloudiness) ois.readObject();
 
-            if (!firstIteration)
-                if (readPrecipitation == this.knownPeriods.get(singlePeriod).getPrecipitation()) {
-                    if (Math.abs(readTemperature - weather.getTemperature()) <= weatherChanged.getDeltaTemperature()){
-                        this.knownPeriods.remove(singlePeriod);
-                        singlePeriod.setTimeEnd(readTime2);
-                        this.knownPeriods.put(singlePeriod, weather);
+            Weather prevWeather = this.knownPeriods.get(singlePeriod);
+            if (!firstIteration) {
+                if (weatherChanged.getDeltaPrecipitation() && readPrecipitation != prevWeather.getPrecipitation())
+                    concat = false;
+                if (weatherChanged.getDeltaCloudiness() && readCloudiness != prevWeather.getCloudiness())
+                    concat = false;
+                if (Math.abs(readTemperature - prevWeather.getTemperature()) > weatherChanged.getDeltaTemperature())
+                    concat = false;
 
-                        continue;
-                    }
-                }
+            } else concat = false;
 
-            weather = new Weather(readHumidity, readTemperature, readWindSpeed, readPressure, readPrecipitation, readCloudiness);
-            singlePeriod = new SinglePeriod(readTime1, readTime2);
-            this.knownPeriods.put(singlePeriod, weather);
-            firstIteration = false;
+            if (concat) {
+                this.knownPeriods.remove(singlePeriod);
+                this.timePeriods.remove(singlePeriod);
+                singlePeriod.setTimeEnd(readTime2);
+                this.knownPeriods.put(singlePeriod, prevWeather);
+                this.timePeriods.add(singlePeriod);
+                firstIteration = false;
+            } else {    
+                weather = new Weather(readHumidity, readTemperature, readWindSpeed, readPressure, readPrecipitation, readCloudiness);
+                singlePeriod = new SinglePeriod(readTime1, readTime2);
+                this.knownPeriods.put(singlePeriod, weather);
+                this.timePeriods.add(singlePeriod);
+                firstIteration = false;
+                concat = true;
+            }    
         }
-
     }
 
 }

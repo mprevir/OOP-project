@@ -17,7 +17,7 @@ public class WeatherChanged {
 
     public WeatherChanged() {
         deltaHumidity = 10;
-        deltaTemperature = 5;
+        deltaTemperature = 3;
         deltaWindSpeed = 10;
         deltaPressure = 20;
         deltaPrecipitation = true;

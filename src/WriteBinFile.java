@@ -24,14 +24,14 @@ public class WriteBinFile {
         double temperature = 22;
         double windSpeed = 5;
         double pressure =760;
-        Weather weather = new Weather(humidity, temperature, windSpeed, pressure, Weather.Precipitation.RAIN, Weather.Cloudiness.BKN);
+        Weather weather = new Weather(humidity, temperature, windSpeed, pressure, Weather.Precipitation.NONE, Weather.Cloudiness.BKN);
         SinglePeriod singlePeriod = new SinglePeriod(timeBegin, timeEnd);
 
         writeToFile(weather, singlePeriod, oos);
         timeBegin = new Date(2012, 5, 6, 14, 0);
         timeEnd = new Date(2012, 5, 6, 16, 0);
         singlePeriod = new SinglePeriod(timeBegin, timeEnd);
-        weather.setPrecipitation(Weather.Precipitation.NONE);
+        weather.setTemperature(20);
         writeToFile(weather, singlePeriod, oos);
 
         timeBegin = new Date(2012, 5, 6, 16, 0);
@@ -42,7 +42,7 @@ public class WriteBinFile {
         writeToFile(weather, singlePeriod, oos);
 
         oos.close();
-        fos.close();       */
+        fos.close();      */
 
         FileInputStream fis = new FileInputStream(f);
         ObjectInputStream ois = new ObjectInputStream(fis);
