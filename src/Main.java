@@ -25,7 +25,7 @@ public class Main {
 
         Info info1 = new Info();
         try {
-            info1.readWeatherInfo("D:\\weathersource3.ddw");
+            info1.readWeatherInfo("/media/sdb4/weathersource.ddw");
         } catch (IOException s) {
             return;
         }

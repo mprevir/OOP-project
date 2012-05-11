@@ -8,12 +8,12 @@ package ua.dudeweather;
  * To change this template use File | Settings | File Templates.
  */
 public class Location {
-    private double longtitude;
+    private double longitude;
     private double latitude;
     private String placeName;
 
     public Location(){
-        longtitude = 0;
+        longitude = 0;
         latitude = 0;
         placeName = "the Gulf of Guinea";
 

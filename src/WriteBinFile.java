@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class WriteBinFile {
     public static void main(String args[]) throws IOException, ClassNotFoundException {
-        File f = new File("D:\\weathersource2.ddw");
+        File f = new File("/media/sdb4/weathersource2.ddw");
         /*if (!f.exists())
             f.createNewFile();
         FileOutputStream fos = new FileOutputStream(f, true);
@@ -46,7 +46,7 @@ public class WriteBinFile {
                                  */
         FileInputStream fis = new FileInputStream(f);
         ObjectInputStream ois = new ObjectInputStream(fis);
-        while (fis.available() != 0)   {
+        while (fis.available() != 0) {
             Date readTime = (Date) ois.readObject();
             Date readTime2 = (Date) ois.readObject();
             double readHumidity = ois.readDouble();

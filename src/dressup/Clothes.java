@@ -30,9 +30,11 @@ public class Clothes {
     }
     
     public boolean fits(Weather weather) {
-        if (weather.getTemperature() < this.lowTemperature || weather.getTemperature() > this.highTemperature) return false;
-        if (!this.suitsAnyCloud && !(this.suitsCloud.contains(weather.getCloudiness()))) return false;
-        if (!this.suitsAnyPrecip && !(this.suitsPrecip.contains(weather.getPrecipitation()))) return false;
-        return true;
+        return ((weather.getTemperature() >= this.lowTemperature) &&
+                 (weather.getTemperature() <= this.highTemperature)) &&
+               (this.suitsAnyCloud ||
+                (this.suitsCloud.contains(weather.getCloudiness()))) &&
+               (this.suitsAnyPrecip ||
+                (this.suitsPrecip.contains(weather.getPrecipitation())));
     }
 }

@@ -20,7 +20,6 @@ public class Info {
     private Forecaster forecaster;
     private ArrayList<SinglePeriod> timePeriods;
 
-
     public Info() {
         this.navigator = new Navigator();
         this.currentPos = new Location();
@@ -63,16 +62,15 @@ public class Info {
     }
 
     public SinglePeriod getCurrentPeriod(Map<SinglePeriod, Weather> knownPeriods, Date curDate) throws NoSuchPeriodException {
-        Iterator it = knownPeriods.entrySet().iterator();
 
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry) it.next();
+        for (Map.Entry<SinglePeriod, Weather> singlePeriodWeatherEntry : knownPeriods.entrySet()) {
+            Map.Entry pairs = (Map.Entry) singlePeriodWeatherEntry;
             SinglePeriod chkPeriod = (SinglePeriod) pairs.getKey();
-            if (curDate.after(chkPeriod.getTimeBegin()) && curDate.before(chkPeriod.getTimeEnd()))
+            if (curDate.after(chkPeriod.getTimeBegin()) && curDate.before(chkPeriod.getTimeEnd())) {
                 return chkPeriod;
+            }
         }
 
-        //TODO: throw exeption AllouYobaNetuInfy
         throw new NoSuchPeriodException(curDate);
     }
 
@@ -98,7 +96,6 @@ public class Info {
         }
         ObjectInputStream ois = new ObjectInputStream(fis);
         while (fis.available() != 0)   {
-
             Date readTime1 = (Date) ois.readObject();
             Date readTime2 = (Date) ois.readObject();
             readHumidity = ois.readDouble();

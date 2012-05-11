@@ -13,8 +13,6 @@ public class Weather {
     private double windSpeed;
     private double pressure;
 
-
-
     public enum Precipitation {NONE, DRIZZLE, RAIN, HAIL, SNOW}
     private Precipitation precipitation;
     public enum Cloudiness {SKC, FEW, BKN, OVC} /* SKC - clear sky
