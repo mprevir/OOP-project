@@ -22,8 +22,6 @@ public class WeatherChanged {
         deltaPressure = 20;
         deltaPrecipitation = true;
         deltaCloudiness = false;
-
-        System.out.println("object WeatherChanged created");
     }
 
     public double getDeltaTemperature() {

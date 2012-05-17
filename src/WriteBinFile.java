@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class WriteBinFile {
     public static void main(String args[]) throws IOException, ClassNotFoundException {
-        File f = new File("/media/sdb4/weathersource2.ddw");
+        File f = new File("D://weathersource.ddw");
         /*if (!f.exists())
             f.createNewFile();
         FileOutputStream fos = new FileOutputStream(f, true);

@@ -51,4 +51,19 @@ public class Bodywear extends Clothes{
 
         return bodywear;
     }
+
+    public static Bodywear createTshirt(){
+        Bodywear bodywear = new Bodywear();
+
+        bodywear.lowTemperature = 16;
+        bodywear.highTemperature = 40;
+        bodywear.suitsAnyPrecip = false;
+        bodywear.suitsPrecip = new ArrayList<Weather.Precipitation>();
+        bodywear.suitsPrecip.add(Weather.Precipitation.NONE);
+        bodywear.suitsPrecip.add(Weather.Precipitation.DRIZZLE);
+        bodywear.suitsAnyCloud = true;
+        bodywear.s = "Dude wearing T-shirt";
+
+        return bodywear;
+    }
 }

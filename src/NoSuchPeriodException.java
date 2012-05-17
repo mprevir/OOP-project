@@ -11,7 +11,11 @@ import java.util.Date;
  */
 public class NoSuchPeriodException extends Exception{
     private Date date;
-    
+
+    public NoSuchPeriodException() {
+        date = null;
+    }
+
     public NoSuchPeriodException(Date date1) {
         this.date = date1;
     }

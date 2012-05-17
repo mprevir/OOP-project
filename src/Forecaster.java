@@ -12,7 +12,6 @@ import java.util.Date;
  */
 public class Forecaster {
     public Forecaster(){
-        System.out.println("object Forecaster created");
     }
 
     public Weather getWeather(Location pos, Date time){

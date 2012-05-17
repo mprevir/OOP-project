@@ -9,7 +9,6 @@ package ua.dudeweather;
  */
 public class Navigator {
     public Navigator(){
-        System.out.println("object Navigator created");
     }
 
     public Location getCurrentPos(){

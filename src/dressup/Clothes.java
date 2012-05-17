@@ -28,6 +28,10 @@ public class Clothes {
     public void draw() {
         System.out.println(s);
     }
+
+    public String getString() {
+        return this.s;
+    }
     
     public boolean fits(Weather weather) {
         return ((weather.getTemperature() >= this.lowTemperature) &&
